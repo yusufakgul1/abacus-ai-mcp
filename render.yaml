@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: abacus-ai-mcp
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: ABACUS_API_KEY
+        sync: false
+      - key: ABACUS_MODEL
+        sync: false
+      - key: MCP_ACCESS_TOKEN
+        generateValue: true
